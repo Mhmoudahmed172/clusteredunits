@@ -1,0 +1,8 @@
+{
+  "name": "منصة منتجات الوحدات الإنتاجية العنقودية - غزة",
+  "description": "منصة وطنية لعرض وتسويق منتجات الوحدات الإنتاجية العنقودية في قطاع غزة وطلب عروض الأسعار والتعاقد المباشر.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
