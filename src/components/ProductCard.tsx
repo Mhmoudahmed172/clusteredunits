@@ -147,7 +147,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         )}
 
-        {/* Subtle Bottom Media Count (Only for added media) & Product Code */}
+        {/* Subtle Bottom Media Count (Only for added media) */}
         <div className="absolute bottom-2.5 inset-x-3 flex items-center justify-between text-white pointer-events-none text-[11px]">
           <div className="flex items-center gap-2">
             {totalImagesCount > 1 && (
@@ -169,10 +169,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               </span>
             )}
           </div>
-
-          <span className="text-[#E5C168] font-bold tracking-wide tabular-nums" dir="ltr">
-            {product.id}
-          </span>
         </div>
       </div>
 
@@ -213,7 +209,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               onClick={() => onViewCluster(product.clusterId)}
               className="font-semibold text-[#1C4587] hover:underline cursor-pointer"
             >
-              {product.clusterName} ({product.clusterId})
+              {product.clusterName}
             </button>
           </div>
 

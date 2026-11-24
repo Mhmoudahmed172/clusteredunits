@@ -438,7 +438,7 @@ export const RfqModal: React.FC<RfqModalProps> = ({
                 نموذج طلب عرض سعر وتعاقد (RFQ)
               </h2>
               <p className="text-xs text-[#E5C168]">
-                {product.title} ({product.id})
+                {product.title}
               </p>
             </div>
           </div>
@@ -577,9 +577,6 @@ export const RfqModal: React.FC<RfqModalProps> = ({
               />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-[#0F253E] text-[#E5C168]" dir="ltr">
-                    {product.id}
-                  </span>
                   <span className="text-[11px] font-bold text-[#1C4587]">{product.sector}</span>
                 </div>
                 <h4 className="text-sm font-black text-[#0F253E] mt-0.5">{product.title}</h4>

@@ -431,12 +431,6 @@ export const LandingView: React.FC<LandingViewProps> = ({
                         <span className="px-2.5 py-1 rounded-md bg-[#0F253E]/85 text-[#E5C168] font-bold">
                           {activeHeroProduct.sector}
                         </span>
-                        <span
-                          className="text-white/90 font-bold tabular-nums"
-                          dir="ltr"
-                        >
-                          {activeHeroProduct.id}
-                        </span>
                       </div>
 
                       <div className="space-y-1.5">
@@ -445,7 +439,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
                         </h3>
                         <div className="flex items-center justify-between gap-2 text-xs text-slate-200">
                           <span className="truncate">
-                            {activeHeroProduct.enterpriseName} · {activeHeroProduct.clusterId}
+                            {activeHeroProduct.enterpriseName} · {activeHeroProduct.clusterName}
                           </span>
                           <span className="text-[#E5C168] font-black tabular-nums shrink-0">
                             يبدأ من{' '}
@@ -932,7 +926,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
         <div className="space-y-5">
           <div className="flex items-center justify-between">
             <h4 className="text-base sm:text-lg font-black text-[#0F253E]">
-              نماذج التجمعات الإنتاجية والمحطات المركزية (CL1 – CL15)
+              نماذج التجمعات الإنتاجية والمحطات المركزية
             </h4>
             <button
               type="button"
@@ -966,8 +960,8 @@ export const LandingView: React.FC<LandingViewProps> = ({
 
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-xs text-slate-500">
-                      <span className="font-black text-[#1C4587] tabular-nums" dir="ltr">
-                        {cl.id}
+                      <span className="font-bold text-[#1C4587]">
+                        {cl.sector}
                       </span>
                       <span className="inline-flex items-center gap-1 font-medium">
                         <MapPin className="w-3.5 h-3.5 text-[#C8A24B]" />
@@ -1160,11 +1154,11 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
           <div className="md:col-span-5 relative">
             <Search className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
-            <input
+              <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="ابحث باسم المنتج، المعرّف (PRD-101)، أو المنشأة..."
+              placeholder="ابحث باسم المنتج، القطاع، أو المنشأة الصناعية..."
               className="w-full pr-10 pl-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/60 focus:bg-white text-xs sm:text-sm focus:outline-none focus:border-[#0F253E]"
             />
           </div>
@@ -1178,7 +1172,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
               <option value="ALL">جميع التجمعات العنقودية ({clusters.length})</option>
               {clusters.map((c) => (
                 <option key={c.id} value={c.id}>
-                  {c.id} - {c.name} ({c.governorate})
+                  {c.name} ({c.governorate})
                 </option>
               ))}
             </select>
@@ -1265,7 +1259,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
             onClick={() => onViewCluster(selectedCluster)}
             className="text-[#1C4587] font-bold hover:underline cursor-pointer"
           >
-            عرض تفاصيل التجمع ({selectedCluster}) ←
+            عرض تفاصيل التجمع ←
           </button>
         )}
       </div>
@@ -1314,7 +1308,6 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
           <table className="w-full text-right text-xs sm:text-sm tabular-nums">
             <thead className="bg-slate-50 text-[#0F253E] border-b border-slate-200">
               <tr>
-                <th className="p-4 font-bold">المعرّف</th>
                 <th className="p-4 font-bold">المنتج</th>
                 <th className="p-4 font-bold">القطاع</th>
                 <th className="p-4 font-bold">المنشأة والتجمع</th>
@@ -1329,9 +1322,6 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
                 const lowestTier = sorted[sorted.length - 1];
                 return (
                   <tr key={p.id} className="hover:bg-slate-50/70 transition-colors">
-                    <td className="p-4 font-bold text-[#1C4587]" dir="ltr">
-                      {p.id}
-                    </td>
                     <td className="p-4">
                       <div className="flex items-center gap-3">
                         <img
@@ -1360,7 +1350,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
                         onClick={() => onViewCluster(p.clusterId)}
                         className="text-xs text-[#1C4587] hover:underline cursor-pointer"
                       >
-                        {p.clusterName} ({p.clusterId})
+                        {p.clusterName}
                       </button>
                     </td>
                     <td className="p-4 font-black text-[#0F253E]">
@@ -1476,9 +1466,6 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
                             alt={cp.title}
                             className="w-full h-32 rounded-xl object-cover border border-slate-200"
                           />
-                          <div className="text-xs font-bold text-[#1C4587]" dir="ltr">
-                            {cp.id}
-                          </div>
                           <div className="font-black text-[#0F253E] text-sm">{cp.title}</div>
                         </div>
                       </th>
@@ -1500,7 +1487,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
                       <td key={cp.id} className="p-3">
                         <div className="font-bold text-slate-900">{cp.enterpriseName}</div>
                         <div className="text-xs text-slate-500">
-                          {cp.clusterName} ({cp.clusterId})
+                          {cp.clusterName}
                         </div>
                       </td>
                     ))}
@@ -1768,13 +1755,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                       <div className="absolute top-3 left-3 bg-black/55 backdrop-blur-xs text-white px-2.5 py-1 rounded-md text-[11px] font-bold flex items-center gap-1 opacity-85 group-hover/gallery:opacity-100 transition-opacity">
                         <Eye className="w-3.5 h-3.5 text-[#E5C168]" />
                         <span>تكبير الصورة</span>
-                      </div>
-
-                      <div
-                        className="absolute bottom-3 left-3 bg-[#0F253E]/85 text-[#E5C168] px-2.5 py-1 rounded-md text-xs font-bold tabular-nums"
-                        dir="ltr"
-                      >
-                        {product.id}
                       </div>
 
                       {allImages.length > 1 && (
@@ -2112,7 +2092,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     <span>الوحدة الإنتاجية العنقودية</span>
                   </div>
                   <div className="text-base font-black text-[#0F253E]">
-                    {product.clusterName} ({product.clusterId})
+                    {product.clusterName}
                   </div>
                   <div className="flex items-center gap-3 text-xs">
                     {cluster && (
@@ -2399,10 +2379,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             {/* Top Bar */}
             <div className="w-full flex items-center justify-between text-white px-2">
               <div className="flex items-center gap-2 text-xs sm:text-sm font-bold">
-                <span className="text-[#E5C168]" dir="ltr">
-                  {product.id}
-                </span>
-                <span className="text-white/40">·</span>
                 <span>{product.title}</span>
                 {allImages.length > 1 && (
                   <span className="text-slate-400 tabular-nums" dir="ltr">
@@ -2494,7 +2470,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-[#C8A24B]" />
                 <h3 className="text-base font-black">
-                  بطاقة المواصفات الفنية المعتمدة — {product.id}
+                  بطاقة المواصفات الفنية المعتمدة
                 </h3>
               </div>
               <div className="flex items-center gap-2">
@@ -2527,9 +2503,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     القطاع: {product.sector} · الاتحاد: {product.unionName}
                   </div>
                 </div>
-                <span className="px-3 py-1 rounded bg-[#0F253E] text-[#E5C168] font-bold text-xs" dir="ltr">
-                  {product.id}
-                </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
@@ -2540,7 +2513,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 <div>
                   <span className="text-slate-500">التجمع العنقودي:</span>{' '}
                   <strong className="text-slate-900">
-                    {product.clusterName} ({product.clusterId})
+                    {product.clusterName}
                   </strong>
                 </div>
                 <div>
@@ -2658,7 +2631,7 @@ export const ClustersDirectoryView: React.FC<ClustersDirectoryViewProps> = ({
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="ابحث باسم التجمع، المعرّف (CL1)، المنشأة المستضيفة، أو المحافظة..."
+              placeholder="ابحث باسم التجمع، المنشأة المستضيفة، أو المحافظة..."
               className="w-full pr-10 pl-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/60 focus:bg-white text-xs sm:text-sm focus:outline-none focus:border-[#0F253E]"
             />
           </div>
@@ -2726,8 +2699,8 @@ export const ClustersDirectoryView: React.FC<ClustersDirectoryViewProps> = ({
                 {/* Clean Unboxed Top Meta */}
                 <div>
                   <div className="flex items-center justify-between gap-2 text-xs text-slate-500 mb-1.5">
-                    <span className="font-black text-[#1C4587] tabular-nums" dir="ltr">
-                      {cluster.id}
+                    <span className="font-bold text-[#1C4587]">
+                      {cluster.sector}
                     </span>
                     <span className="inline-flex items-center gap-1 font-medium">
                       <MapPin className="w-3.5 h-3.5 text-[#C8A24B]" />
@@ -2847,11 +2820,7 @@ export const ClusterDetailView: React.FC<ClusterDetailViewProps> = ({
       {/* Cluster Header Banner */}
       <div className="hero-industrial-pattern text-white rounded-2xl border-b-2 border-[#C8A24B] p-6 lg:p-8">
         <div className="flex flex-wrap items-center gap-2 text-xs text-slate-300 mb-2">
-          <span className="font-black text-[#E5C168]" dir="ltr">
-            {cluster.id}
-          </span>
-          <span aria-hidden="true">·</span>
-          <span>{cluster.sector}</span>
+          <span className="font-bold text-[#E5C168]">{cluster.sector}</span>
           <span aria-hidden="true">·</span>
           <span className="inline-flex items-center gap-1">
             <MapPin className="w-3.5 h-3.5 text-[#C8A24B]" />
@@ -3134,7 +3103,7 @@ export const MyOrdersView: React.FC<MyOrdersViewProps> = ({
                       onClick={() => onViewProduct(order.productId)}
                       className="text-base font-black text-[#0F253E] hover:text-[#1C4587] cursor-pointer"
                     >
-                      {order.productTitle} ({order.productId})
+                      {order.productTitle}
                     </button>
                   </div>
 
@@ -3277,7 +3246,7 @@ export const MyOrdersView: React.FC<MyOrdersViewProps> = ({
                 <div className="space-y-1">
                   <div className="text-slate-500">الجهة المنتجة:</div>
                   <div className="font-bold text-[#0F253E] text-sm">{proformaOrder.enterpriseName}</div>
-                  <div>التجمع: {proformaOrder.clusterName} ({proformaOrder.clusterId})</div>
+                  <div>التجمع: {proformaOrder.clusterName}</div>
                   <div>القطاع: {proformaOrder.attributedSector}</div>
                 </div>
               </div>
@@ -3295,7 +3264,7 @@ export const MyOrdersView: React.FC<MyOrdersViewProps> = ({
                 <tbody className="divide-y divide-slate-200">
                   <tr>
                     <td className="p-3 font-bold text-[#0F253E]">
-                      {proformaOrder.productTitle} ({proformaOrder.productId})
+                      {proformaOrder.productTitle}
                     </td>
                     <td className="p-3">{proformaOrder.contractMode}</td>
                     <td className="p-3">
